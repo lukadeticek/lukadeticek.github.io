@@ -302,6 +302,11 @@ section h2 {
   .contact p {
     font-size: 1.75rem;
   }
+
+  .contact a {
+    font-size: 1.75rem;
+  }
+
 }
 
 /* Burger Menu */
