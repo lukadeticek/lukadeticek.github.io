@@ -248,7 +248,7 @@ section h2 {
   }
 
   .photo-grid img {
-    max-width: 300px;
+    max-width: 100%;
   }
 
   .contact p {
@@ -281,20 +281,33 @@ section h2 {
     flex-wrap: wrap;
     justify-content: center;
     gap: 1rem;
-    align-items: stretch; /* 👈 Ensures items stretch to full height */
+    align-items: stretch; 
   }
   
     .photo-item-wide,
     .photo-wide {
       width: 100%;
-      height: auto;
+      
     }
 
+    .photo-item,
+    .photo-item-wide,
+    .photo-wide {
+      width: 100%;
+      max-width: 100%;
+      height:fit-content;
+      margin: 0 auto;
+    }
+  
+    .photo-item img,
+    .photo-item-wide img,
+    .photo-wide img {
+      
+      object-fit: cover;
+    }
   
 
-  .photo-grid img {
-    max-width: 90%;
-  }
+  
 
   .about,
   .gallery,
@@ -314,8 +327,8 @@ section h2 {
   .contact a {
     font-size: 1.75rem;
   }
-
 }
+
 
 /* Burger Menu */
 .burger {
@@ -368,7 +381,7 @@ section h2 {
   overflow: hidden;
   max-width: 400px;
   width: 100%;
-  transition: transform 0.3s ease; /* Add this line */
+  transition: transform 0.3s ease; 
   z-index: 0;
 }
 
@@ -380,7 +393,7 @@ section h2 {
 }
 
 .photo-item:hover {
-  transform: scale(1.03); /* Slight zoom */
+  transform: scale(1.03); 
 }
 
 .photo-item::before {
@@ -390,7 +403,7 @@ section h2 {
   left: 0;
   height: 100%;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+  background-color: rgba(0, 0, 0, 0.5); 
   opacity: 0;
   transition: opacity 0.3s ease;
   z-index: 1;
@@ -450,7 +463,7 @@ section h2 {
 }
 
 .photo-item-wide:hover {
-  transform: scale(1.03); /* Match normal photo zoom */
+  transform: scale(1.03); 
 }
 
 .photo-item-wide::before {
@@ -460,7 +473,7 @@ section h2 {
   left: 0;
   height: 100%;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Same dark overlay */
+  background-color: rgba(0, 0, 0, 0.5); 
   opacity: 0;
   transition: opacity 0.3s ease;
   z-index: 1;
