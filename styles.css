@@ -283,6 +283,14 @@ section h2 {
     gap: 1rem;
     align-items: stretch; /* 👈 Ensures items stretch to full height */
   }
+  
+    .photo-item-wide,
+    .photo-wide {
+      width: 100%;
+      height: auto;
+    }
+
+  
 
   .photo-grid img {
     max-width: 90%;
@@ -300,7 +308,7 @@ section h2 {
   }
 
   .contact p {
-    font-size: 1.75rem;
+    font-size: 1.25rem;
   }
 
   .contact a {
