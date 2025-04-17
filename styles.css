@@ -295,6 +295,7 @@ section h2 {
     .photo-item-wide,
     .photo-wide {
       width: 100%;
+      border-radius: 8px;
       
     }
 
@@ -313,6 +314,7 @@ section h2 {
     .photo-wide img {
       
       object-fit: cover;
+      border-radius: 8px;
     }
   
 
@@ -392,6 +394,7 @@ section h2 {
   width: 100%;
   transition: transform 0.3s ease; 
   z-index: 0;
+  border-radius: 8px;
 }
 
 .photo-item img {
@@ -399,6 +402,7 @@ section h2 {
   width: 100%;
   height: auto;
   transition: opacity 0.3s ease;
+  border-radius: 8px;
 }
 
 .photo-item:hover {
@@ -460,6 +464,7 @@ section h2 {
   transition: transform 0.3s ease;
   margin-left: auto;
   margin-right: auto;
+  border-radius: 8px;
 }
 
 .photo-item-wide img {
@@ -471,6 +476,7 @@ section h2 {
   transition: transform 0.3s ease, opacity 0.3s ease;
   margin-left: auto;
   margin-right: auto;
+  border-radius: 10px;
 }
 
 .photo-item-wide:hover {
