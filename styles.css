@@ -127,6 +127,14 @@ section h2 {
   text-align: center;
 }
 
+.gallery2 {
+  margin-top: -7rem;
+  padding: 4rem 2rem;
+  background-color: #111;
+  text-align: center;
+  align-content: center;
+}
+
 .photo-grid {
   display: flex;
   flex-wrap: wrap;
@@ -297,6 +305,7 @@ section h2 {
       max-width: 100%;
       height:fit-content;
       margin: 0 auto;
+      align-content:center ;
     }
   
     .photo-item img,
@@ -440,9 +449,7 @@ section h2 {
   opacity: 1;
 }
 
-.photo-item-wide:hover .caption {
-  opacity: 1;
-}
+
 
 .photo-item-wide {
   position: relative;
@@ -451,6 +458,8 @@ section h2 {
   max-width: 100%;
   height: 500px;
   transition: transform 0.3s ease;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .photo-item-wide img {
@@ -460,6 +469,8 @@ section h2 {
   object-fit: cover;
   max-width: none;
   transition: transform 0.3s ease, opacity 0.3s ease;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .photo-item-wide:hover {
@@ -508,6 +519,9 @@ h2.inside {
   max-width: 100%;
   height: auto;
   transition: transform 0.3s ease;
+  align-content: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .photo-wide img {
@@ -517,6 +531,9 @@ h2.inside {
   object-fit: cover;
   max-width: none;
   transition: transform 0.3s ease, opacity 0.3s ease;
+  margin-left: auto;
+  margin-right: auto;
+  
 }
 
 .photo-wide:hover {
@@ -537,5 +554,7 @@ h2.inside {
   border-radius: 8px;
 }
 
-
+.gallery2 h2 {
+  margin-bottom: 2rem;
+}
 
