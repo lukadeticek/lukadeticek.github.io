@@ -387,9 +387,7 @@ section h2 {
 }
 
 @media (min-width: 1024px) {
-  .hero {
-    padding-bottom: 70rem;
-  }
+
 }
 /* Hover IMG Animation */
 .photo-item {
