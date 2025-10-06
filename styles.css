@@ -1,0 +1,220 @@
+/* ===== STRICT TWO-COLOR THEME ===== */
+:root{
+  --ink: #1A1A1A;     /* off-black */
+  --paper: #F5F5F5;   /* off-white */
+  --maxw: 1400px;
+  --t-fast: 180ms;
+  --t-med: 350ms;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body { margin: 0; }
+
+html {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: ui-sans-serif, system-ui, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.1;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color var(--t-med) ease, color var(--t-med) ease;
+}
+
+/* Layout container */
+.container {
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding: 2rem 1.25rem;
+}
+
+/* Brutalist typography: huge vs micro */
+.display {
+  font-weight: 1000;
+  letter-spacing: -0.02em;
+  font-size: clamp(3rem, 10vw, 14rem);
+  line-height: 0.9;
+  
+}
+
+.micro {
+  font-size: clamp(0.62rem, 0.75vw, 0.9rem);
+  letter-spacing: 0.08em;
+  opacity: 0.92;
+}
+
+.description {
+    font-size: clamp(0.9rem, 1.4vw + 0.4rem, 2rem);
+  line-height: 1.15;
+}
+
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  align-content: end;
+  padding-block: 10vh 8vh;
+  overflow: clip;
+}
+
+.hero__inner {
+  max-width: 92ch;
+  position: relative;
+  z-index: 2; /* keep text above texture */
+}
+
+/* Faint, monochrome texture */
+.hero__texture {
+  position: absolute;
+  inset: 0;
+  background-image: url("best-of.jpg");   /* replace */
+  background-size: cover;
+  background-position: center;
+  opacity: 0.12;
+  filter: grayscale(1) contrast(1.08);
+  pointer-events: none;
+  transition: opacity var(--t-med) ease;
+  z-index: 1;
+}
+
+/* Micro scroll cue */
+.scrollcue {
+  position: absolute;
+  left: 1.25rem;
+  bottom: 1.25rem;
+  opacity: 0.75;
+  z-index: 2;
+}
+
+/* ===== GALLERY GRID (centered + sane spans for mixed orientations) ===== */
+.gallery {
+  display: grid;
+  gap: 1.25rem;
+
+  /* fixed-ish columns so centering works and spans are meaningful */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 320px));
+  grid-auto-flow: dense;
+
+  /* centers the last row when it isn't full */
+  justify-content: center;
+
+  padding-block: 6rem;
+}
+
+/* Base card wrapper */
+.card {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  background: var(--paper);
+}
+
+/* Image behavior */
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform var(--t-med) ease, opacity var(--t-fast) linear;
+}
+
+/* Hover scale (subtle) */
+.card:hover img,
+.card:focus-visible img {
+  transform: scale(1.02);
+}
+
+/* Orientation helpers — spans sized to look balanced */
+.card.portrait {
+  aspect-ratio: 3 / 4;
+  grid-column: span 1;       /* narrow/tall */
+}
+
+.card.square {
+  aspect-ratio: 1 / 1;
+  grid-column: span 1;       /* same footprint as portrait */
+}
+
+.card.landscape {
+  aspect-ratio: 5 / 3;
+  grid-column: span 2;       /* make horizontals more dominant */
+}
+
+.card.wide {
+  aspect-ratio: 2 / 1;
+  grid-column: span 3;       /* extra-wide banner (when room allows) */
+}
+
+/* ===== Responsive adjustments ===== */
+/* When the grid can’t comfortably fit 3 tracks, reduce wide to span 2 */
+@media (max-width: 1200px) {
+  .card.wide { grid-column: span 2; }
+}
+
+/* Tablet and below: single-width columns for all for clean stacking */
+@media (max-width: 900px) {
+  .card.landscape,
+  .card.wide { grid-column: span 1; }
+}
+
+/* Phone: force single column and tighten gaps */
+@media (max-width: 640px) {
+  .gallery {
+    grid-template-columns: 1fr;
+    justify-content: stretch; /* single column doesn't need centering */
+    gap: 1rem;
+  }
+}
+
+/* ===== CONTACT ===== */
+.contact {
+  padding-block: 20vh 12vh;
+  border-top: 1px solid currentColor;
+}
+
+.contact a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  transition: opacity var(--t-fast) linear;
+}
+.contact a:hover,
+.contact a:focus-visible { opacity: 0.7; }
+
+/* ===== ENTRANCE / SCROLL REVEAL ===== */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity var(--t-med) ease, transform var(--t-med) ease;
+}
+.is-inview { opacity: 1; transform: none; }
+
+/* Initial load nudge for the hero headline */
+html.loaded .hero .display {
+  animation: rise var(--t-med) ease both;
+}
+@keyframes rise {
+  from { transform: translateY(6px); }
+  to { transform: none; }
+}
+
+/* ===== ACCESSIBILITY ===== */
+:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+/* ===== NO-JS VISIBILITY FALLBACK ===== */
+html:not(.js) [data-reveal] {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* ===== REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+  html { transition: none; }
+  .card img,
+  [data-reveal] { transition: none; transform: none; }
+  .display { animation: none; }
+}
