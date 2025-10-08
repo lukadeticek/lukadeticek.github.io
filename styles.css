@@ -42,7 +42,7 @@ html {
 
 @media (max-width: 640px) {
   .display {
-    font-size: clamp(5rem, 10vw + 2rem, 20rem);
+    font-size: clamp(4rem, 8vw + 2rem, 20rem);
     max-width: 90%;
   }
 }
