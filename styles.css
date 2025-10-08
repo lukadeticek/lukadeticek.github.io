@@ -1,4 +1,6 @@
-/* ===== STRICT TWO-COLOR THEME ===== */
+/* ================================
+   STRICT TWO-COLOR THEME / BASE
+   ================================ */
 :root {
   --ink: #1A1A1A;     /* off-black */
   --paper: #F5F5F5;   /* off-white */
@@ -28,7 +30,9 @@ html {
   padding: 2rem 1.25rem;
 }
 
-/* Brutalist typography: huge vs micro */
+/* ================================
+   TYPOGRAPHY
+   ================================ */
 .display {
   font-weight: 1000;
   letter-spacing: -0.02em;
@@ -60,7 +64,21 @@ html {
   line-height: 1.5;
 }
 
-/* ===== HERO ===== */
+/* Optional inline link style you added */
+.links {
+  color: #1A1A1A;
+  font-style: italic;
+}
+
+/* Gentle global max-widths on very small screens (your rule) */
+@media (max-width: 640px) {
+  p { max-width: 90%; }
+  h1 { max-width: 90%; }
+}
+
+/* ================================
+   HERO
+   ================================ */
 .hero {
   position: relative;
   min-height: 100svh;
@@ -85,18 +103,18 @@ html {
   z-index: 2;
 }
 
-/* ===== GALLERY GRID (centered + sane spans for mixed orientations) ===== */
+/* ================================
+   GALLERY GRID
+   (centered + spans for mixed orientations)
+   ================================ */
 .gallery {
   display: grid;
   gap: 1.25rem;
-
   /* fixed-ish columns so centering works and spans are meaningful */
   grid-template-columns: repeat(auto-fit, minmax(280px, 320px));
   grid-auto-flow: dense;
-
-  /* centers the last row when it isn't full */
+  /* center last row when not full */
   justify-content: center;
-
   padding-block: 4rem;
 }
 
@@ -117,7 +135,7 @@ html {
   transition: transform var(--t-med) ease, opacity var(--t-fast) linear;
 }
 
-/* Hover scale (subtle) */
+/* Subtle hover */
 .card:hover img,
 .card:focus-visible img {
   transform: scale(1.02);
@@ -131,12 +149,10 @@ html {
 
 .card.portrait.main {
   grid-column: span 2;
-  }
+}
 
 @media (max-width: 640px) {
-  .card.portrait.main {
-    grid-column: span 1;
-    }
+  .card.portrait.main { grid-column: span 1; }
 }
 
 .card.square {
@@ -146,17 +162,18 @@ html {
 
 .card.landscape {
   aspect-ratio: 5 / 3;
-  grid-column: span 2; /* make horizontals more dominant */
+  grid-column: span 2; /* more dominant */
 }
 
 .card.landscape.main {
   grid-column: span 4;
 }
 
+/* NOTE: The next selector intentionally repeats classes,
+   which increases specificity but matches the same elements.
+   Kept as-is to preserve behavior. */
 @media (max-width: 640px) {
-  .card.card.landscape.main.main {
-    grid-column: span 1;
-    }
+  .card.card.landscape.main.main { grid-column: span 1; }
 }
 
 .card.wide {
@@ -164,19 +181,16 @@ html {
   grid-column: span 3; /* extra-wide banner (when room allows) */
 }
 
-/* ===== Responsive adjustments ===== */
-/* When the grid can’t comfortably fit 3 tracks, reduce wide to span 2 */
+/* Responsive adjustments */
 @media (max-width: 1200px) {
   .card.wide { grid-column: span 2; }
 }
 
-/* Tablet and below: single-width columns for all for clean stacking */
 @media (max-width: 900px) {
   .card.landscape,
   .card.wide { grid-column: span 1; }
 }
 
-/* Phone: force single column and tighten gaps */
 @media (max-width: 640px) {
   .gallery {
     grid-template-columns: 1fr;
@@ -185,12 +199,15 @@ html {
   }
 }
 
-/* ===== CONTACT ===== */
+/* ================================
+   CONTACT
+   ================================ */
 .contact {
   padding-block: 1vh 1vh;
   border-top: 1px solid currentColor;
 }
 
+/* Base link style (will be overridden by button-like style below) */
 .contact a {
   color: inherit;
   text-decoration: none;
@@ -203,108 +220,7 @@ html {
   opacity: 0.7;
 }
 
-/* ===== ENTRANCE / SCROLL REVEAL ===== */
-[data-reveal] {
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity var(--t-med) ease, transform var(--t-med) ease;
-}
-
-.is-inview {
-  opacity: 1;
-  transform: none;
-}
-
-/* Initial load nudge for the hero headline */
-html.loaded .hero .display {
-  animation: rise var(--t-med) ease both;
-}
-
-@keyframes rise {
-  from { transform: translateY(6px); }
-  to { transform: none; }
-}
-
-/* ===== ACCESSIBILITY ===== */
-:focus-visible {
-  outline: 2px solid currentColor;
-  outline-offset: 2px;
-}
-
-/* ===== NO-JS VISIBILITY FALLBACK ===== */
-html:not(.js) [data-reveal] {
-  opacity: 1 !important;
-  transform: none !important;
-}
-
-/* ===== REDUCED MOTION ===== */
-@media (prefers-reduced-motion: reduce) {
-  html { transition: none; }
-  .card img,
-  [data-reveal] { transition: none; transform: none; }
-  .display { animation: none; }
-}
-
-/* ===== BACK BUTTON (fixed, original look) ===== */
-.back-button {
-  position: absolute;           /* stays put on scroll */
-  top: 17%;
-  left: 2rem;
-  z-index: 1000;
-
-  font-family: inherit;
-  font-weight: 700;
-  font-size: clamp(0.9rem, 1vw + 0.5rem, 1.3rem);
-  letter-spacing: -0.02em;
-
-  color: var(--ink);
-  background: var(--paper);
-  text-decoration: none;
-
-  border: 2px solid currentColor;
-  padding: 0.4em 0.8em;
-
-  /* smooth fade */
-  opacity: 1;
-  transition: opacity 0.4s ease, background-color 0.2s ease, color 0.2s ease;
-  cursor: pointer;
-}
-
-.back-button:hover,
-.back-button:focus-visible {
-  background: var(--ink);
-  color: var(--paper);
-}
-
-/* fades out after we add .is-hidden with JS */
-.back-button.is-hidden {
-  opacity: 0 !important;
-  pointer-events: none;
-}
-
-/* Mobile offset tweak only */
-@media (max-width: 640px) {
-  .back-button {
-    top: 1.2rem;
-    left: 1.2rem;
-    font-size: clamp(1rem, 2vw + 0.5rem, 1.5rem);
-    padding: 0.35em 0.7em;
-  }
-}
-
-/* Motion respect */
-@media (prefers-reduced-motion: reduce) {
-  .back-button { transition: none; }
-}
-
-/* If you ever use dark inversion elsewhere, keep contrast */
-.invert .back-button {
-  color: var(--paper);
-  background: var(--ink);
-  border-color: var(--paper);
-}
-
-/* ===== CONTACT LINKS styled like the BACK BUTTON ===== */
+/* CONTACT LINKS styled like the BACK BUTTON (overrides the base link style) */
 .contact a {
   display: inline-block;
   margin: 0.4rem 0.3rem;
@@ -339,12 +255,99 @@ html:not(.js) [data-reveal] {
   justify-content: center;
 }
 
-.links {
-color: #1A1A1A;
-font-style: italic;
+/* ================================
+   ENTRANCE / SCROLL REVEAL
+   ================================ */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity var(--t-med) ease, transform var(--t-med) ease;
+}
+.is-inview { opacity: 1; transform: none; }
+
+html.loaded .hero .display {
+  animation: rise var(--t-med) ease both;
+}
+@keyframes rise {
+  from { transform: translateY(6px); }
+  to   { transform: none; }
 }
 
+/* ================================
+   ACCESSIBILITY / FALLBACKS
+   ================================ */
+:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+/* No-JS visibility fallback */
+html:not(.js) [data-reveal] {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html { transition: none; }
+  .card img,
+  [data-reveal] { transition: none; transform: none; }
+  .display { animation: none; }
+}
+
+/* ================================
+   BACK BUTTON
+   ================================ */
+/* NOTE: You explicitly set this to absolute (not fixed), so it will move with scroll.
+   Keeping as-is to preserve behavior. */
+.back-button {
+  position: absolute;
+  top: 17%;
+  left: 2rem;
+  z-index: 1000;
+
+  font-family: inherit;
+  font-weight: 700;
+  font-size: clamp(0.9rem, 1vw + 0.5rem, 1.3rem);
+  letter-spacing: -0.02em;
+
+  color: var(--ink);
+  background: var(--paper);
+  text-decoration: none;
+
+  border: 2px solid currentColor;
+  padding: 0.4em 0.8em;
+
+  opacity: 1;
+  transition: opacity 0.4s ease, background-color 0.2s ease, color 0.2s ease;
+  cursor: pointer;
+}
+
+.back-button:hover,
+.back-button:focus-visible {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* Hidden state (class added via JS if you use it) */
+.back-button.is-hidden {
+  opacity: 0 !important;
+  pointer-events: none;
+}
+
+/* Mobile offset tweak only */
 @media (max-width: 640px) {
-  p { max-width: 90%;
-    }
-    }
+  .back-button {
+    top: 1.2rem;
+    left: 1.2rem;
+    font-size: clamp(1rem, 2vw + 0.5rem, 1.5rem);
+    padding: 0.35em 0.7em;
+  }
+}
+
+/* If you ever use dark inversion elsewhere, keep contrast */
+.invert .back-button {
+  color: var(--paper);
+  background: var(--ink);
+  border-color: var(--paper);
+}
