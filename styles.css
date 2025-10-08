@@ -343,3 +343,8 @@ html:not(.js) [data-reveal] {
 color: #1A1A1A;
 font-style: italic;
 }
+
+@media (max-width: 640px) {
+  p { max-width: 90%;
+    }
+    }
