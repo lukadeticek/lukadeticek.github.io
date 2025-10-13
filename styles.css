@@ -239,7 +239,7 @@ html {
 
   font-family: inherit;
   font-weight: 700;
-  font-size: clamp(0.9rem, 1vw + 0.4rem, 1.2rem);
+  font-size: clamp(1.6rem, 0.2vw + 0.3rem, 0.3rem);
   letter-spacing: -0.02em;
   text-decoration: none;
   text-transform: none;
@@ -361,4 +361,65 @@ html:not(.js) [data-reveal] {
   color: var(--paper);
   background: var(--ink);
   border-color: var(--paper);
+}
+
+/* =========================================
+   HOME GALLERY — HOVER LABELS
+   Off-white with black outline (no invert)
+   ========================================= */
+.gallery--home .card {
+  position: relative;
+  isolation: isolate;
+}
+
+/* Hidden by default */
+.gallery--home .card::after {
+  content: attr(data-caption);
+  position: absolute;
+  left: 0.8rem;
+  bottom: 0.8rem;
+  z-index: 1;
+
+  display: inline-block;
+  padding: 0.4em 0.8em;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: clamp(0.9rem, 1vw + 0.4rem, 1.2rem);
+  letter-spacing: -0.02em;
+
+  /* Off-white button look */
+  color: var(--ink);
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity var(--t-med) ease,
+    transform var(--t-med) ease;
+  pointer-events: none;
+}
+
+/* Reveal on hover/focus */
+.gallery--home .card:hover::after,
+.gallery--home .card:focus-visible::after {
+  opacity: 1;
+  transform: none;
+}
+
+/* Slight image dim for contrast */
+.gallery--home .card:hover img,
+.gallery--home .card:focus-visible img {
+  opacity: 0.9;
+}
+
+/* Mobile spacing */
+@media (max-width: 640px) {
+  .gallery--home .card::after {
+    left: 0.6rem;
+    bottom: 0.6rem;
+    padding: 0.35em 0.7em;
+    font-size: clamp(0.95rem, 0.8rem + 0.6vw, 1.05rem);
+  }
 }
