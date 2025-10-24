@@ -125,3 +125,75 @@ document.addEventListener('click', (e) => {
 
     io.observe(contact);
   });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const rail = document.querySelector(".contact-rail");
+  const contact = document.querySelector("#contact");
+  if (!rail) return;
+
+  
+  // Apply on load + on scroll
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+
+  /* --- 2) Hide when contact section is visible --- */
+  if (contact && "IntersectionObserver" in window) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          rail.classList.toggle("is-hidden", entry.isIntersecting);
+        });
+      },
+      { threshold: 0.25 } // hide when 25% of contact is in view
+    );
+    io.observe(contact);
+  }
+});
+// Add is-home on the root or /index.html so CSS can target it
+  (function () {
+    var p = location.pathname.replace(/\/+$/, "");
+    if (p === "" || p === "/" || /\/index\.html?$/.test(p)) {
+      document.body.classList.add("is-home");
+    }
+  })();
+
+  document.addEventListener("DOMContentLoaded", () => {
+  const rail = document.querySelector(".contact-rail");
+  const contact = document.querySelector("#contact");
+  if (!rail) return;
+
+  const isHome = document.body.classList.contains("is-home");
+
+  // Ensure it's NOT hidden on load for the home page
+  rail.classList.remove("is-near-top", "at-top");
+
+  /* --- Hide when NEAR TOP (only on non-home pages) --- */
+  if (!isHome) {
+    const TOP_FADE_DISTANCE = 500;
+    let ticking = false;
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const y = window.scrollY || window.pageYOffset;
+        rail.classList.toggle("is-near-top", y < TOP_FADE_DISTANCE);
+        ticking = false;
+      });
+    }
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+  }
+
+  /* --- Hide when the CONTACT section is visible (all pages) --- */
+  if (contact && "IntersectionObserver" in window) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          rail.classList.toggle("is-hidden", entry.isIntersecting);
+        });
+      },
+      { threshold: 0.25 }
+    );
+    io.observe(contact);
+  }
+});
