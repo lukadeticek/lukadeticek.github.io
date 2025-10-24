@@ -81,3 +81,47 @@ document.addEventListener('click', (e) => {
     `width=${popupWidth},height=${popupHeight},left=${left},top=${top},scrollbars=no,resizable=no`
   );
 });
+
+
+  // Hide the contact button when the contact section is in view
+  document.addEventListener("DOMContentLoaded", () => {
+    const contactButton = document.querySelector(".contact-button");
+    const contactSection = document.querySelector("#contact");
+
+    if (!contactButton || !contactSection) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            contactButton.classList.add("is-hidden");
+          } else {
+            contactButton.classList.remove("is-hidden");
+          }
+        });
+      },
+      {
+        root: null,
+        threshold: 0.2, // triggers when 20% of contact section is visible
+      }
+    );
+
+    observer.observe(contactSection);
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const rail = document.querySelector(".contact-rail");
+    const contact = document.querySelector("#contact");
+    if (!rail || !contact) return;
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          rail.classList.toggle("is-hidden", entry.isIntersecting);
+        });
+      },
+      { threshold: 0.25 } // hide when 25% of contact is visible
+    );
+
+    io.observe(contact);
+  });
