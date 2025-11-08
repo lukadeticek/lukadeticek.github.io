@@ -3,10 +3,59 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Luka Detiček + Photographer</title>
-  <meta name="description" content="Fashion & Documentary Photography" />
+
+  <title>Luka Detiček</title>
+
+  <meta name="description"
+        content="Luka Detiček je modni in dokumentarni fotograf iz Ljubljane. Ustvarja filmsko obarvane portrete, editoriale in koncertne fotografije z značilnim minimalističnim slogom." />
+  <meta name="keywords"
+        content="Luka Detiček, lukadeticek, photographer, videographer, fashion photographer, documentary photographer, fashion videographer, Ljubljana, Slovenia, Slovenija, modni fotograf, modni videograf, dokumentarni fotograf, koncertna fotografija, editorial, portrait, film, short film, creative director, video production, visual storytelling, photographer in Ljubljana, videographer in Ljubljana, fotograf Ljubljana, snemalec, snemalec Ljubljana, snemalec koncertov, snemalec dogodkov" />
+  <meta name="author" content="Luka Detiček" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Luka Detiček — modni in dokumentarni fotograf" />
+  <meta property="og:description"
+        content="Portfolio Luke Detička — modna in dokumentarna fotografija iz Ljubljane, Slovenija." />
+  <meta property="og:url" content="https://lukadeticek.com/" />
+  <meta property="og:image" content="https://lukadeticek.com/images/preview.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Luka Detiček — fotograf" />
+  <meta name="twitter:description"
+        content="Modni in dokumentarni fotograf iz Ljubljane, Slovenija." />
+  <meta name="twitter:image" content="https://lukadeticek.com/images/preview.jpg" />
+
+  <link rel="canonical" href="https://lukadeticek.com/" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   <link rel="preload" as="image" href="best-of.jpg" />
   <link rel="stylesheet" href="styles.css" />
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Luka Detiček",
+  "url": "https://lukadeticek.com",
+  "image": "https://lukadeticek.com/images/preview.jpg",
+  "jobTitle": "Photographer and Videographer",
+  "description": "Fashion and documentary photographer & videographer based in Ljubljana, Slovenia — creating editorials, portraits, live music visuals and short films.",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Luka Detiček Studio"
+  },
+  "sameAs": [
+    "https://instagram.com/shot.byluka",
+    "mailto:shot.byyluka@gmail.com",
+    "tel:+38670463418"
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Ljubljana",
+    "addressCountry": "SI"
+  },
+  "knowsAbout": ["Fashion Photography", "Documentary Photography", "Videography", "Film Production", "Portraits", "Visual Storytelling"]
+}
+</script>
 </head>
 <body>
   <main class="site" id="site">
@@ -52,6 +101,22 @@
   <a class="card landscape" href="drill.html" data-caption="DRILL — Castle festival"><img src="images/drillpivo.jpg" loading="lazy" alt="" /></a>
 </section>
 
+<!-- FILM / VIDEOGRAPHY -->
+<section class="film-reel container" aria-label="Videography" id="filmReel">
+  <h2 class="display2" data-reveal>Film</h2>
+
+  <div class="reel">
+    <div class="reel__track">
+      <!-- One set only; JS will clone this set once for a perfect loop -->
+      <video src="video/interview.mp4" autoplay muted loop playsinline preload="metadata"></video>
+      <video src="video/killed.mp4" autoplay muted loop playsinline preload="metadata"></video>
+      <video src="video/interview2.mp4" autoplay muted loop playsinline preload="metadata"></video>
+      <video src="videos/clip4.mp4" autoplay muted loop playsinline preload="metadata"></video>
+      <video src="videos/clip5.mp4" autoplay muted loop playsinline preload="metadata"></video>
+    </div>
+  </div>
+</section>
+
     <!-- CONTACT -->
     <section class="contact container" id="contact" aria-label="Contact">
       <h2 class="display" data-reveal>Contact</h2>
@@ -67,7 +132,7 @@
 <!-- COPYRIGHT -->
 <footer class="footer container" aria-label="Footer">
   <p class="micro copyright">
-    © <span id="year"></span> Luka Detiček. All rights reserved.
+    © <span id="year"></span> Luka Detiček. All rights reserved. / +386 070 463 418
   </p>
 </footer>
   </main>

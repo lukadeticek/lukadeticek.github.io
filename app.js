@@ -1,199 +1,274 @@
-/* Minimal, robust enhancements:
-   - Mark that JS is available (for CSS fallbacks)
-   - IntersectionObserver reveal for [data-reveal]
-   - Color inversion fallback if :has() is unsupported
-*/
+/* ============================================================
+   Luka Detiček — site JS (FULL)
+   ============================================================ */
+
+/* 0) Mark JS + load nudge */
 (function () {
-  // 0) Mark JS present ASAP (unblocks CSS fallbacks)
   document.documentElement.classList.add('js');
-
-  const docEl = document.documentElement;
-
-  // 1) Initial load nudge on hero
   window.addEventListener('DOMContentLoaded', () => {
-    docEl.classList.add('loaded');
+    document.documentElement.classList.add('loaded');
   });
+})();
 
-  // 2) Reveal on scroll
-  const revealEls = Array.prototype.slice.call(
-    document.querySelectorAll('[data-reveal]')
-  );
-
-  if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver(
-      (entries, obs) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-inview');
-            obs.unobserve(entry.target);
-          }
-        });
-      },
-      { rootMargin: '0px 0px -10% 0px', threshold: 0.01 }
-    );
-
-    revealEls.forEach((el) => io.observe(el));
-  } else {
-    // Fallback: show immediately
-    revealEls.forEach((el) => el.classList.add('is-inview'));
-  }
-
-  // 3) :has() fallback for site-wide inversion on gallery hover
-  const supportsHas = CSS && CSS.supports && CSS.supports(':has(*)');
-
-  if (!supportsHas) {
-    const cards = document.querySelectorAll('.gallery .card');
-    const on = () => docEl.classList.add('invert');
-    const off = () => docEl.classList.remove('invert');
-
-    cards.forEach((card) => {
-      card.addEventListener('mouseenter', on);
-      card.addEventListener('mouseleave', off);
-      card.addEventListener('focus', on, true);
-      card.addEventListener('blur', off, true);
-    });
+/* 1) is-home flag */
+(function () {
+  var p = location.pathname.replace(/\/+$/, '');
+  if (p === '' || p === '/' || /\/index\.html?$/.test(p)) {
+    document.body.classList.add('is-home');
   }
 })();
 
+/* 2) Reveal on scroll */
+(function () {
+  const revealEls = Array.prototype.slice.call(document.querySelectorAll('[data-reveal]'));
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-inview'); obs.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.01 });
+    revealEls.forEach((el) => io.observe(el));
+  } else {
+    revealEls.forEach((el) => el.classList.add('is-inview'));
+  }
+})();
 
+/* 3) :has() fallback for gallery invert */
+(function () {
+  const supportsHas = CSS && CSS.supports && CSS.supports(':has(*)');
+  if (supportsHas) return;
+  const docEl = document.documentElement;
+  const cards = document.querySelectorAll('.gallery .card');
+  const on = () => docEl.classList.add('invert');
+  const off = () => docEl.classList.remove('invert');
+  cards.forEach((card) => {
+    card.addEventListener('mouseenter', on);
+    card.addEventListener('mouseleave', off);
+    card.addEventListener('focus', on, true);
+    card.addEventListener('blur', off, true);
+  });
+})();
 
+/* 4) Popup links */
 document.addEventListener('click', (e) => {
   const a = e.target.closest('a.popup-link');
   if (!a) return;
-
   const href = a.getAttribute('href') || '';
   if (/^(mailto:|tel:)/i.test(href)) return;
-
   e.preventDefault();
-
-  // Popup size
-  const popupWidth = 1200;
-  const popupHeight = 600;
-
-  // Calculate right-side position
-  const left = window.screen.width - popupWidth - 100; // 20px margin from screen edge
+  const popupWidth = 1200, popupHeight = 600;
+  const left = window.screen.width - popupWidth - 100;
   const top = Math.max((window.screen.height - popupHeight) / 2, 0);
-
-  // Open the popup
-  window.open(
-    href,
-    'popup',
-    `width=${popupWidth},height=${popupHeight},left=${left},top=${top},scrollbars=no,resizable=no`
-  );
+  window.open(href, 'popup', `width=${popupWidth},height=${popupHeight},left=${left},top=${top},scrollbars=no,resizable=no`);
 });
 
+/* 5) Hide floating contact button when #contact visible */
+document.addEventListener('DOMContentLoaded', () => {
+  const contactButton = document.querySelector('.contact-button');
+  const contactSection = document.querySelector('#contact');
+  if (!contactButton || !contactSection) return;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e) => contactButton.classList.toggle('is-hidden', e.isIntersecting));
+  }, { threshold: 0.2 });
+  observer.observe(contactSection);
+});
 
-  // Hide the contact button when the contact section is in view
-  document.addEventListener("DOMContentLoaded", () => {
-    const contactButton = document.querySelector(".contact-button");
-    const contactSection = document.querySelector("#contact");
-
-    if (!contactButton || !contactSection) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            contactButton.classList.add("is-hidden");
-          } else {
-            contactButton.classList.remove("is-hidden");
-          }
-        });
-      },
-      {
-        root: null,
-        threshold: 0.2, // triggers when 20% of contact section is visible
-      }
-    );
-
-    observer.observe(contactSection);
-  });
-
-  document.addEventListener("DOMContentLoaded", () => {
-    const rail = document.querySelector(".contact-rail");
-    const contact = document.querySelector("#contact");
-    if (!rail || !contact) return;
-
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          rail.classList.toggle("is-hidden", entry.isIntersecting);
-        });
-      },
-      { threshold: 0.25 } // hide when 25% of contact is visible
-    );
-
-    io.observe(contact);
-  });
-
-document.addEventListener("DOMContentLoaded", () => {
-  const rail = document.querySelector(".contact-rail");
-  const contact = document.querySelector("#contact");
+/* 6) Contact rail logic (consolidated) */
+document.addEventListener('DOMContentLoaded', () => {
+  const rail = document.querySelector('.contact-rail');
+  const contact = document.querySelector('#contact');
   if (!rail) return;
+  const isHome = document.body.classList.contains('is-home');
+  rail.classList.remove('is-near-top', 'at-top');
 
-  
-  // Apply on load + on scroll
+  const TOP_FADE_DISTANCE = 500;
+  let ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const y = window.scrollY || window.pageYOffset;
+      if (!isHome) rail.classList.toggle('is-near-top', y < TOP_FADE_DISTANCE);
+      ticking = false;
+    });
+  }
   onScroll();
-  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener('scroll', onScroll, { passive: true });
 
-  /* --- 2) Hide when contact section is visible --- */
-  if (contact && "IntersectionObserver" in window) {
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          rail.classList.toggle("is-hidden", entry.isIntersecting);
-        });
-      },
-      { threshold: 0.25 } // hide when 25% of contact is in view
-    );
+  if (contact && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => rail.classList.toggle('is-hidden', e.isIntersecting));
+    }, { threshold: 0.25 });
     io.observe(contact);
   }
 });
-// Add is-home on the root or /index.html so CSS can target it
-  (function () {
-    var p = location.pathname.replace(/\/+$/, "");
-    if (p === "" || p === "/" || /\/index\.html?$/.test(p)) {
-      document.body.classList.add("is-home");
-    }
-  })();
 
-  document.addEventListener("DOMContentLoaded", () => {
-  const rail = document.querySelector(".contact-rail");
-  const contact = document.querySelector("#contact");
-  if (!rail) return;
+/* 7) FILM REEL — perfect loop (transform), hover speed, drag/swipe */
+document.addEventListener('DOMContentLoaded', () => {
+  const root = document.querySelector('#filmReel');
+  if (!root) return;
 
-  const isHome = document.body.classList.contains("is-home");
+  const reel  = root.querySelector('.reel');         // container (no scroll)
+  const track = root.querySelector('.reel__track');  // inline-flex row
+  if (!reel || !track) return;
 
-  // Ensure it's NOT hidden on load for the home page
-  rail.classList.remove("is-near-top", "at-top");
+  /* ---- Tunables ---- */
+  const BASE_SPEED_PX_S  = 60;    // >0 moves left; <0 moves right
+  const HOVER_SPEED_PX_S = 130;   // same sign as base
+  const RESUME_DELAY_MS  = 120;
+  const RESPECT_PREFERS_REDUCED_MOTION = false; // set true to respect OS
 
-  /* --- Hide when NEAR TOP (only on non-home pages) --- */
-  if (!isHome) {
-    const TOP_FADE_DISTANCE = 500;
-    let ticking = false;
-    function onScroll() {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        const y = window.scrollY || window.pageYOffset;
-        rail.classList.toggle("is-near-top", y < TOP_FADE_DISTANCE);
-        ticking = false;
+  let speed = BASE_SPEED_PX_S;
+  let phase = 0;                  // 0..W
+  let W = 0;                      // width of ONE set (we clone to make A+A)
+  let lastTs = 0;
+  let playing = shouldPlay();
+  let resumeTimer = null;
+
+  function shouldPlay() {
+    return !document.hidden && (RESPECT_PREFERS_REDUCED_MOTION ? !window.matchMedia('(prefers-reduced-motion: reduce)').matches : true);
+  }
+
+  // --- 1) Ensure we have EXACTLY A + A (clone at runtime for a perfect match)
+  function ensureDuplicate() {
+    const children = Array.from(track.children);
+    if (children.length === 0) return;
+    const half = Math.floor(children.length / 2);
+    const isAlreadyDup =
+      children.length % 2 === 0 &&
+      children.slice(0, half).every((el, i) => {
+        const a = el.getAttribute('src');
+        const b = children[i + half]?.getAttribute('src');
+        return a && b && a === b;
       });
+
+    if (!isAlreadyDup) {
+      // Keep original set (A)
+      const originals = Array.from(track.children);
+      // Clear and append A
+      track.innerHTML = '';
+      originals.forEach(n => track.appendChild(n));
+      // Append clone (A again)
+      originals.forEach(n => track.appendChild(n.cloneNode(true)));
     }
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
   }
 
-  /* --- Hide when the CONTACT section is visible (all pages) --- */
-  if (contact && "IntersectionObserver" in window) {
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          rail.classList.toggle("is-hidden", entry.isIntersecting);
-        });
-      },
-      { threshold: 0.25 }
-    );
-    io.observe(contact);
+  // --- 2) Measure EXACT width of ONE set (W = half of scrollWidth after cloning)
+  function measureW() {
+    // Videos may change width after metadata → measure after layout
+    W = track.scrollWidth / 2;
   }
+
+  // --- 3) Apply transform from phase (use 3D + round to 0.001px to avoid float drift seams)
+  function applyTransform() {
+    const x = -Math.round(phase * 1000) / 1000; // stabilize sub-pixel accumulation
+    track.style.transform = `translate3d(${x}px,0,0)`;
+  }
+
+  // --- 4) Animation loop (true modulo wrap)
+  function tick(ts) {
+    if (!playing || W <= 0) {
+      lastTs = 0;
+      requestAnimationFrame(tick);
+      return;
+    }
+    if (!lastTs) lastTs = ts;
+    const dt = (ts - lastTs) / 1000;
+    lastTs = ts;
+
+    phase += speed * dt;
+    phase %= W;
+    if (phase < 0) phase += W;
+
+    applyTransform();
+    requestAnimationFrame(tick);
+  }
+
+  // --- Hover speed (preserve direction)
+  root.addEventListener('mouseenter', () => {
+    speed = Math.sign(BASE_SPEED_PX_S || 1) * Math.abs(HOVER_SPEED_PX_S);
+  });
+  root.addEventListener('mouseleave', () => {
+    speed = BASE_SPEED_PX_S;
+  });
+
+  // --- Visibility / reduced motion
+  document.addEventListener('visibilitychange', () => { playing = shouldPlay(); lastTs = 0; });
+  if (RESPECT_PREFERS_REDUCED_MOTION) {
+    const mql = window.matchMedia('(prefers-reduced-motion: reduce)');
+    mql.addEventListener?.('change', () => { playing = shouldPlay(); lastTs = 0; });
+  }
+
+  // --- Re-measure on layout & when videos become known size
+  const ro = new ResizeObserver(() => {
+    const prev = W;
+    measureW();
+    // keep visual continuity by mapping current transform into new W
+    if (W > 0 && prev > 0 && W !== prev) {
+      phase = ((phase % W) + W) % W;
+      applyTransform();
+    }
+  });
+  ro.observe(track);
+
+  // Videos: re-measure once their metadata is ready
+  track.querySelectorAll('video').forEach(v => {
+    v.addEventListener('loadedmetadata', () => {
+      measureW();
+      applyTransform();
+    }, { once: true });
+  });
+
+  // --- Drag / Swipe (directly edits phase; no scrolling)
+  let isDown = false, startX = 0, startPhase = 0, dragMoved = false;
+
+  const pauseAuto = () => { playing = false; lastTs = 0; };
+  const resumeAuto = () => {
+    clearTimeout(resumeTimer);
+    resumeTimer = setTimeout(() => { playing = shouldPlay(); lastTs = 0; }, RESUME_DELAY_MS);
+  };
+
+  const down = (pageX) => {
+    if (W <= 0) return;
+    isDown = true;
+    dragMoved = false;
+    startX = pageX;
+    startPhase = phase;
+    reel.classList.add('is-dragging');
+    pauseAuto();
+  };
+  const move = (pageX) => {
+    if (!isDown || W <= 0) return;
+    const dx = pageX - startX;
+    if (Math.abs(dx) > 2) dragMoved = true;
+    // Drag to right → content moves right → phase decreases
+    phase = ((startPhase - dx) % W + W) % W;
+    applyTransform();
+  };
+  const up = () => {
+    if (!isDown) return;
+    isDown = false;
+    reel.classList.remove('is-dragging');
+    resumeAuto();
+  };
+
+  // Mouse
+  reel.addEventListener('mousedown', (e) => { e.preventDefault(); down(e.pageX); });
+  window.addEventListener('mousemove', (e) => move(e.pageX));
+  window.addEventListener('mouseup', up);
+
+  // Touch
+  reel.addEventListener('touchstart', (e) => { if (e.touches[0]) down(e.touches[0].pageX); }, { passive: true });
+  window.addEventListener('touchmove',  (e) => { if (e.touches[0]) move(e.touches[0].pageX); }, { passive: true });
+  window.addEventListener('touchend', up);
+
+  // Defensive: prevent stray clicks after a drag
+  track.addEventListener('click', (e) => { if (dragMoved) e.preventDefault(); }, true);
+
+  // Init
+  ensureDuplicate();
+  // First measurement might be 0 until layout; run a couple frames
+  requestAnimationFrame(() => {
+    measureW();
+    applyTransform();
+    requestAnimationFrame(tick);
+  });
 });

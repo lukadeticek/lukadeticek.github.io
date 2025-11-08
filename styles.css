@@ -305,3 +305,59 @@ html:not(.js) [data-reveal] { opacity: 1 !important; transform: none !important;
   }
   body:not(.is-home) .contact-rail__bar::-webkit-scrollbar { display: none !important; }
 }
+
+/* =========================================================
+   FILM REEL — transform-based infinite loop (pixel-perfect)
+   ========================================================= */
+.film-reel {
+  border-top: 1px solid currentColor;
+  padding-block: 6rem 4rem;
+  overflow: hidden;
+  --reel-height: clamp(500px, 36vh, 520px);
+  --reel-gap: 1.2rem;                 /* used consistently in CSS & measured by JS */
+}
+
+.reel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;                    /* no native scroll; JS drives transform */
+  user-select: none;
+  -webkit-user-drag: none;
+  touch-action: pan-y;                 /* vertical page scroll stays natural */
+}
+
+.reel__track {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--reel-gap);
+  min-width: max-content;              /* honor intrinsic width */
+  will-change: transform;
+  transform: translate3d(0,0,0);       /* GPU path */
+}
+
+/* Videos keep native aspect via fixed height */
+.reel__track video {
+  flex: 0 0 auto;
+  height: var(--reel-height);
+  width: auto;
+  display: block;
+  object-fit: contain;                 /* switch to 'cover' for fill/crop look */
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: 1rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  pointer-events: none;                /* smoother drag */
+}
+
+/* Drag feedback */
+.reel.is-dragging { cursor: grabbing; }
+
+@media (max-width: 640px) {
+  .film-reel { padding-block: 4rem 2rem; }
+  .film-reel { --reel-height: clamp(220px, 34vh, 420px); }
+}
+
+/* Respect reduced motion in other areas (reel is JS-driven) */
+@media (prefers-reduced-motion: reduce) {
+  .reel { scroll-behavior: auto !important; }
+}
