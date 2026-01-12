@@ -36,6 +36,39 @@
   }
 })();
 
+/* 2b) Hero portrait in-view animation */
+(function () {
+  const portrait = document.querySelector('.hero-portrait');
+  if (!portrait) return;
+
+  const trigger = () => {
+    portrait.classList.remove('is-animating');
+    void portrait.offsetWidth;
+    portrait.classList.add('is-animating');
+  };
+
+  if ('IntersectionObserver' in window) {
+    const hero = document.querySelector('.hero');
+    if (!hero) return;
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          portrait.classList.remove('is-out');
+          trigger();
+        } else {
+          portrait.classList.add('is-out');
+        }
+      });
+    }, { rootMargin: '0px 0px -35% 0px', threshold: 0.01 });
+    io.observe(hero);
+  } else {
+    window.addEventListener('DOMContentLoaded', () => {
+      portrait.classList.remove('is-out');
+      trigger();
+    });
+  }
+})();
+
 /* 3) :has() fallback for gallery invert */
 (function () {
   const supportsHas = CSS && CSS.supports && CSS.supports(':has(*)');

@@ -82,6 +82,11 @@
         <p class="description">20 y/o photographer / visual creator <br>from Ljubljana, Slovenia <br>focused on life and its own aesthetic</p>
         <p class="micro">click the images for more.</p>
       </div>
+
+      <!-- HERO PORTRAIT (floats behind the name) -->
+      <!-- Note: make sure the file exists at this path on your server: /images/DSCF1273.jpeg -->
+      <img class="hero-portrait" src="images/DSCF1273.jpg" alt="" aria-hidden="true" />
+
       <div class="hero__texture" aria-hidden="true"></div>
       <small class="scrollcue micro" aria-hidden="true">scroll</small>
     </section>
@@ -89,25 +94,45 @@
     
 
     <!-- GALLERY -->
-    <section class="gallery container gallery--home" aria-label="Selected Works">
-  <a class="card landscape" href="meltdown.html" data-caption="MELTDOWN x channel0"><img src="images/abelmeltdown.jpg" loading="lazy" alt="" /></a>
-  <a class="card portrait" href="aboutlve.html" data-caption="aboutlve — editorial"><img src="images/minaadidas.jpg" loading="lazy" alt="" /></a>
-  <a class="card portrait" href="nordred.html" data-caption="NOR(E)D"><img src="images/nordnoge.jpg" loading="lazy" alt="" /></a>
-  <a class="card landscape" href="mrfy.html" data-caption="MRFY — live / Škisova"><img src="images/mrfyshit.jpg" loading="lazy" alt="" /></a>
-  <a class="card landscape" href="drill.html" data-caption="DRILL — Castle festival"><img src="images/drillroke.jpg" loading="lazy" alt="" /></a>
-  <a class="card portrait" href="marlboro.html" data-caption="Marlboro — editorial"><img src="images/marlboro.jpg" loading="lazy" alt="" /></a>
-  <a class="card portrait" href="nordred.html" data-caption="NOR(E)D"><img src="images/nordred.jpg" loading="lazy" alt="" /></a>
-  <a class="card landscape" href="meltdown.html" data-caption="MELTDOWN x channel0"><img src="images/meltdownvibe.jpg" loading="lazy" alt="" /></a>
-  <a class="card portrait" href="nord.html" data-caption="NORD x channel0"><img src="images/nordspill.jpg" loading="lazy" alt="" /></a>
-  <a class="card landscape" href="meltdown.html" data-caption="MELTDOWN x channel0"><img src="images/abelparty.jpg" loading="lazy" alt="" /></a>
-  <a class="card portrait" href="toja-lana.html" data-caption="Toja & Lana"><img src="images/tojalana.jpg" loading="lazy" alt="" /></a>
-  <a class="card landscape" href="toja-lana.html" data-caption="Toja & Lana"><img src="images/lanaobjem.jpg" loading="lazy" alt="" /></a>
-  <a class="card portrait" href="nord.html" data-caption="NORD x channel0"><img src="images/nordhead.jpg" loading="lazy" alt="" /></a>
-  <a class="card portrait" href="aboutlve.html" data-caption="aboutlve — edtorial"><img src="images/minalook.jpg" loading="lazy" alt="" /></a>
-  <a class="card portrait" href="nordred.html" data-caption="NOR(E)D"><img src="images/nordroka.jpg" loading="lazy" alt="" /></a>
-  <a class="card landscape" href="meltdown.html" data-caption="MELTDOWN x channel0"><img src="images/simonspegli.jpg" loading="lazy" alt="" /></a>
-  <a class="card landscape" href="drill.html" data-caption="DRILL — Castle festival"><img src="images/drillpivo.jpg" loading="lazy" alt="" /></a>
-</section>
+
+    <section class="gallery-section container" aria-label="Collaborations">
+      <h2 class="section-title">Collaborations</h2>
+      <div class="gallery gallery--home">
+        <a class="card landscape" href="meltdown.html" data-caption="MELTDOWN x channel0"><img src="images/abelmeltdown.jpg" loading="lazy" alt="" /></a>
+        <a class="card portrait" href="nordred.html" data-caption="NOR(E)D"><img src="images/nordred.jpg" loading="lazy" alt="" /></a>
+        <a class="card landscape" href="meltdown.html" data-caption="MELTDOWN x channel0"><img src="images/meltdownvibe.jpg" loading="lazy" alt="" /></a>
+        <a class="card portrait" href="nord.html" data-caption="NORD x channel0"><img src="images/nordspill.jpg" loading="lazy" alt="" /></a>
+        <a class="card landscape" href="meltdown.html" data-caption="MELTDOWN x channel0"><img src="images/abelparty.jpg" loading="lazy" alt="" /></a>
+        <a class="card portrait" href="nord.html" data-caption="NORD x channel0"><img src="images/nordhead.jpg" loading="lazy" alt="" /></a>
+        <a class="card landscape" href="meltdown.html" data-caption="MELTDOWN x channel0"><img src="images/simonspegli.jpg" loading="lazy" alt="" /></a>
+        
+        
+        
+        <a class="card portrait" href="nordred.html" data-caption="NOR(E)D"><img src="images/nordroka.jpg" loading="lazy" alt="" /></a>
+      </div>
+    </section>
+
+    <section class="gallery-section container" aria-label="Editorial">
+      <h2 class="section-title">Editorial</h2>
+      <div class="gallery gallery--home">
+        <a class="card portrait" href="marlboro.html" data-caption="Marlboro — editorial"><img src="images/marlboro.jpg" loading="lazy" alt="" /></a>
+        <a class="card portrait" href="toja-lana.html" data-caption="Toja & Lana"><img src="images/tojalana.jpg" loading="lazy" alt="" /></a>
+        <a class="card portrait" href="aggressive.html" data-caption="Agressive - editorial"><img src="images/007/007-5.jpg" loading="lazy" alt="" /></a>
+        <a class="card portrait main" href="rave.html" data-caption="RAVE - editorial"><img src="images/rave/rave-7.jpg" loading="lazy" alt="" /></a>
+        <a class="card portrait main" href="aboutlve.html" data-caption="aboutlve — editorial"><img src="images/minalook.jpg" loading="lazy" alt="" /></a>
+        <a class="card portrait" href="red.html" data-caption="RED - editorial"><img src="images/red/red-6.jpg" loading="lazy" alt="" /></a>
+        <a class="card landscape" href="toja-lana.html" data-caption="Toja & Lana"><img src="images/lanaobjem.jpg" loading="lazy" alt="" /></a>
+      </div>
+    </section>
+
+    <section class="gallery-section container" aria-label="Concert">
+      <h2 class="section-title">Concert</h2>
+      <div class="gallery gallery--home">
+        <a class="card landscape" href="mrfy.html" data-caption="MRFY — live / Škisova"><img src="images/mrfyshit.jpg" loading="lazy" alt="" /></a>
+        <a class="card landscape" href="drill.html" data-caption="DRILL — Castle festival"><img src="images/drillroke.jpg" loading="lazy" alt="" /></a>
+        <a class="card landscape main" href="drill.html" data-caption="DRILL — Castle festival"><img src="images/drillpivo.jpg" loading="lazy" alt="" /></a>
+      </div>
+    </section>
 
 <!-- FILM / VIDEOGRAPHY -->
 <section class="film-reel container" aria-label="Videography" id="filmReel">
