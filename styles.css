@@ -166,12 +166,30 @@ html {
   }
 }
 @media (max-width: 640px) {
+  .hero { align-content: start; padding-block: 2vh 6vh; }
+  .hero__inner { grid-row: 2; }
   .hero-portrait {
-    top: 42%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: relative;
+    grid-row: 1;
+    top: auto;
+    left: auto;
+    transform: translateY(6vh);
     width: min(70vw, 320px);
+    margin: 2rem auto 0.5rem;
     opacity: 0.85;
+  }
+  .hero-portrait.is-animating {
+    animation: portrait-fadein-mobile 900ms ease-out both;
+  }
+  @keyframes portrait-fadein-mobile {
+    from {
+      transform: translateY(6vh) translateX(4%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(6vh) translateX(0);
+      opacity: 1;
+    }
   }
 }
 
