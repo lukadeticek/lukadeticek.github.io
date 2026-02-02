@@ -61,6 +61,36 @@ html {
   opacity: 0.92;
   line-height: 1.3;
 }
+.credits-label,
+.credits-text {
+  font-size: clamp(1rem, 0.78rem + 0.55vw, 1.3rem);
+  letter-spacing: 0.08em;
+  opacity: 0.85;
+  line-height: 1.2;
+  margin: 0;
+}
+.credits-text { font-weight: 700; }
+.credits-text { margin-top: 0.4rem; }
+.credits { padding-block: 0 2rem; }
+@media (max-width: 900px) {
+  .credits-label,
+  .credits-text {
+    font-size: clamp(0.96rem, 0.76rem + 0.65vw, 1.22rem);
+    letter-spacing: 0.06em;
+    line-height: 1.2;
+  }
+  .credits { padding-block: 0 1.5rem; }
+}
+@media (max-width: 640px) {
+  .credits-label,
+  .credits-text {
+    font-size: clamp(0.9rem, 0.74rem + 0.75vw, 1.12rem);
+    letter-spacing: 0.05em;
+    line-height: 1.25;
+  }
+  .credits-text { margin-top: 0.3rem; }
+  .credits { padding-block: 0 1.2rem; }
+}
 
 .description {
   font-size: clamp(1.2rem, 1rem + 1.2vw, 2.4rem);
