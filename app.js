@@ -36,6 +36,36 @@
   }
 })();
 
+/* 1b) Mobile nav toggle */
+document.addEventListener('DOMContentLoaded', () => {
+  const siteNav = document.querySelector('.site-nav');
+  const links = document.querySelector('.site-nav__links');
+  if (!siteNav || !links || siteNav.querySelector('.site-nav__toggle')) return;
+
+  const toggle = document.createElement('button');
+  toggle.className = 'site-nav__toggle';
+  toggle.type = 'button';
+  toggle.setAttribute('aria-label', 'Open navigation');
+  toggle.setAttribute('aria-expanded', 'false');
+  toggle.setAttribute('aria-controls', 'siteNavLinks');
+  toggle.textContent = 'Menu';
+  links.id = links.id || 'siteNavLinks';
+  siteNav.insertBefore(toggle, links);
+
+  toggle.addEventListener('click', () => {
+    const isOpen = siteNav.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', String(isOpen));
+    toggle.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+  });
+
+  links.addEventListener('click', (event) => {
+    if (!event.target.closest('a')) return;
+    siteNav.classList.remove('is-open');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Open navigation');
+  });
+});
+
 /* 2b) Hero portrait in-view animation */
 (function () {
   const portrait = document.querySelector('.hero-portrait');
@@ -144,6 +174,11 @@ document.addEventListener('DOMContentLoaded', () => {
   if (contact && 'IntersectionObserver' in window) {
     const io = new IntersectionObserver((entries) => {
       entries.forEach((e) => {
+        if (!isHome) {
+          rail.classList.remove('is-hidden', 'is-near-top', 'at-top');
+          if (siteNav) siteNav.classList.remove('is-hidden');
+          return;
+        }
         rail.classList.toggle('is-hidden', e.isIntersecting);
         if (siteNav) siteNav.classList.toggle('is-hidden', e.isIntersecting);
       });
