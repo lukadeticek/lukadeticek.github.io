@@ -116,6 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
 /* 6) Contact rail logic (consolidated) */
 document.addEventListener('DOMContentLoaded', () => {
   const rail = document.querySelector('.contact-rail');
+  const siteNav = document.querySelector('.site-nav');
   const contact = document.querySelector('#contact');
   if (!rail) return;
   const isHome = document.body.classList.contains('is-home');
@@ -128,9 +129,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (ticking) return;
     ticking = true;
     requestAnimationFrame(() => {
-      const y = window.scrollY || window.pageYOffset;
       if (!isHome) {
-        rail.classList.toggle('is-near-top', y < TOP_FADE_DISTANCE);
+        rail.classList.remove('is-hidden', 'is-near-top', 'at-top');
+        ticking = false;
+        return;
       }
       ticking = false;
     });
@@ -141,7 +143,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (contact && 'IntersectionObserver' in window) {
     const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => rail.classList.toggle('is-hidden', e.isIntersecting));
+      entries.forEach((e) => {
+        rail.classList.toggle('is-hidden', e.isIntersecting);
+        if (siteNav) siteNav.classList.toggle('is-hidden', e.isIntersecting);
+      });
     }, { threshold: 0.25 });
     io.observe(contact);
   }
@@ -372,5 +377,90 @@ document.addEventListener('DOMContentLoaded', () => {
     measureW();
     applyTransform();
     requestAnimationFrame(tick);
+  });
+});
+
+/* 8) Gallery lightbox for project pages */
+document.addEventListener('DOMContentLoaded', () => {
+  const cards = Array.prototype.slice.call(document.querySelectorAll('.gallery:not(.gallery--home) .card img'));
+  if (!cards.length) return;
+
+  const items = cards.map((img) => ({
+    src: img.currentSrc || img.src,
+    alt: img.alt || ''
+  }));
+
+  const lightbox = document.createElement('div');
+  lightbox.className = 'lightbox';
+  lightbox.setAttribute('role', 'dialog');
+  lightbox.setAttribute('aria-modal', 'true');
+  lightbox.setAttribute('aria-label', 'Image gallery');
+  lightbox.innerHTML = `
+    <button class="lightbox__close" type="button" aria-label="Close gallery">Close</button>
+    <button class="lightbox__nav lightbox__nav--prev" type="button" aria-label="Previous image">Prev</button>
+    <figure class="lightbox__figure">
+      <img class="lightbox__image" alt="">
+      <figcaption class="lightbox__count"></figcaption>
+    </figure>
+    <button class="lightbox__nav lightbox__nav--next" type="button" aria-label="Next image">Next</button>
+  `;
+  document.body.appendChild(lightbox);
+
+  const image = lightbox.querySelector('.lightbox__image');
+  const count = lightbox.querySelector('.lightbox__count');
+  const closeButton = lightbox.querySelector('.lightbox__close');
+  const prevButton = lightbox.querySelector('.lightbox__nav--prev');
+  const nextButton = lightbox.querySelector('.lightbox__nav--next');
+  let activeIndex = 0;
+
+  function show(index) {
+    activeIndex = (index + items.length) % items.length;
+    image.src = items[activeIndex].src;
+    image.alt = items[activeIndex].alt;
+    count.textContent = `${activeIndex + 1} / ${items.length}`;
+  }
+
+  function open(index) {
+    show(index);
+    lightbox.classList.add('is-open');
+    document.documentElement.classList.add('has-lightbox');
+    closeButton.focus({ preventScroll: true });
+  }
+
+  function close() {
+    lightbox.classList.remove('is-open');
+    document.documentElement.classList.remove('has-lightbox');
+    image.removeAttribute('src');
+  }
+
+  cards.forEach((img, index) => {
+    const card = img.closest('.card');
+    if (!card) return;
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
+    card.addEventListener('click', (event) => {
+      event.preventDefault();
+      open(index);
+    });
+    card.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        open(index);
+      }
+    });
+  });
+
+  closeButton.addEventListener('click', close);
+  prevButton.addEventListener('click', () => show(activeIndex - 1));
+  nextButton.addEventListener('click', () => show(activeIndex + 1));
+  lightbox.addEventListener('click', (event) => {
+    if (event.target === lightbox) close();
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (!lightbox.classList.contains('is-open')) return;
+    if (event.key === 'Escape') close();
+    if (event.key === 'ArrowLeft') show(activeIndex - 1);
+    if (event.key === 'ArrowRight') show(activeIndex + 1);
   });
 });

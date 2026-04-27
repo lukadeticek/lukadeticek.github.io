@@ -74,18 +74,33 @@
     <a href="tel:+38670463418" class="contact-rail__btn">+386 70 463 418</a>
   </div>
 </nav>
+
+  <header class="site-nav" aria-label="Main navigation">
+    <a class="site-nav__brand" href="#top">Luka Detiček</a>
+    <nav class="site-nav__links" aria-label="Portfolio sections">
+      <a href="#work">Work</a>
+      <a href="#services">Services</a>
+      <a href="#filmReel">Film</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
     <!-- HERO -->
-    <section class="hero container" aria-label="Intro">
+    <section class="hero container" id="top" aria-label="Intro">
       <div class="hero__inner" data-reveal>
         <h1 class="display">Luka<br>Detiček</h1>
-        <p class="micro">Fashion. Reality.</p>
-        <p class="description">20 y/o photographer / visual creator <br>from Ljubljana, Slovenia <br>focused on life and its own aesthetic</p>
-        <p class="micro">click the images for more.</p>
+        <p class="micro accent-line">Fashion. Reality.</p>
+        <p class="description hero-copy">Photographer / visual creator from Ljubljana, Slovenia<br> — editorials, portraits, live music, brand stories and film stills.</p>
+        <div class="hero-actions" aria-label="Primary actions">
+          <a href="#work">View work</a>
+          <a href="#contact">Book / enquire</a>
+        </div>
+        <p class="micro hero-note">raw frames / minimal direction / human energy</p>
       </div>
 
       <!-- HERO PORTRAIT (floats behind the name) -->
       <!-- Note: make sure the file exists at this path on your server: /images/DSCF1273.jpeg -->
-      <img class="hero-portrait" src="images/DSCF1273.jpg" alt="" aria-hidden="true" />
+      <img class="hero-portrait" src="images/profil.jpeg" alt="" aria-hidden="true" />
 
       <div class="hero__texture" aria-hidden="true"></div>
       <small class="scrollcue micro" aria-hidden="true">scroll</small>
@@ -93,48 +108,83 @@
 
     
 
+    <!-- CLIENT INTRO -->
+    <section class="client-intro container" aria-label="Client overview">
+      <div class="client-intro__eyebrow">Portfolio / Visual direction / Booking</div>
+      <div class="client-intro__grid">
+        <p class="client-intro__lead">Minimal and raw, but easier to move through. Choose a category, feel the mood, then contact me with the type of shoot you need.</p>
+        <div class="client-intro__meta">
+          <span>Ljubljana / Slovenia</span>
+          <span>Photo + video</span>
+          <span>Black / white / burnt brown</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="services container" id="services" aria-label="Services">
+      <div class="services__heading">
+        <p class="micro accent-line">For clients</p>
+        <h2 class="display2">What I shoot</h2>
+      </div>
+      <div class="services__grid">
+        <a href="#work" class="service-card"><span>01</span><strong>Editorial / fashion</strong><small>styled portraits, lookbooks, campaigns</small></a>
+        <a href="#work" class="service-card"><span>02</span><strong>Artist visuals</strong><small>press photos, covers, posters, personal branding</small></a>
+        <a href="#work" class="service-card"><span>03</span><strong>Concert / events</strong><small>flash, movement, backstage, atmosphere</small></a>
+        <a href="#filmReel" class="service-card"><span>04</span><strong>Film / video</strong><small>BTS stills, visual fragments, short-form direction</small></a>
+      </div>
+    </section>
+
+    <!-- WORK -->
+    <section class="work-intro container" id="work" aria-label="Work index">
+      <p class="micro accent-line">Selected work</p>
+      <h2 class="display2">Start here.</h2>
+      <p class="description">A cleaner path through the work: editorials, collaborations, concerts and film, each with its own mood and rhythm.</p>
+    </section>
+
     <!-- GALLERY -->
 
     <section class="gallery-section container" aria-label="Editorial">
-      <h2 class="section-title">Editorial</h2>
+      <div class="section-head"><h2 class="section-title">Editorial</h2><p class="section-subtitle">fashion, portrait stories, personal projects</p></div>
       <div class="gallery gallery--home">
-        <a class="card portrait" href="marlboro.html" data-caption="Marlboro - editorial"><img src="images/marlboro.jpg" loading="lazy" alt="" /></a>
-        <a class="card portrait" href="toja-lana.html" data-caption="Toja & Lana"><img src="images/tojalana.jpg" loading="lazy" alt="" /></a>
+        <a class="card portrait" href="marlboro.html" data-caption="Marlboro - editorial"><img src="images/marlboro.jpeg" loading="lazy" alt="" /></a>
+        <a class="card portrait" href="toja-lana.html" data-caption="Toja & Lana"><img src="images/tojalana.jpeg" loading="lazy" alt="" /></a>
         <a class="card portrait" href="zeropants.html" data-caption="ZERO garments - editorial"><img src="images/zeropants/IMG_1342.jpg" loading="lazy" alt="" /></a>
         <a class="card portrait main" href="rave.html" data-caption="RAVE - editorial"><img src="images/rave/rave-7.jpg" loading="lazy" alt="" /></a>
-        <a class="card portrait main" href="aboutlve.html" data-caption="aboutlve - editorial"><img src="images/minalook.jpg" loading="lazy" alt="" /></a>
+        <a class="card portrait main" href="aboutlve.html" data-caption="aboutlve - editorial"><img src="images/minalook.jpeg" loading="lazy" alt="" /></a>
         <a class="card portrait" href="red.html" data-caption="RED - editorial"><img src="images/red/red-6.jpg" loading="lazy" alt="" /></a>
-        <a class="card landscape" href="toja-lana.html" data-caption="Toja & Lana"><img src="images/lanaobjem.jpg" loading="lazy" alt="" /></a>
+        <a class="card landscape" href="toja-lana.html" data-caption="Toja & Lana"><img src="images/lanaobjem.jpeg" loading="lazy" alt="" /></a>
       </div>
     </section>
 
     <section class="gallery-section container" aria-label="Collaborations">
-      <h2 class="section-title">Collaborations</h2>
+      <div class="section-head"><h2 class="section-title">Collaborations</h2><p class="section-subtitle">brand work, community, campaign energy</p></div>
       <div class="gallery gallery--home">
-        <a class="card landscape" href="meltdown.html" data-caption="MELTDOWN x ZERO"><img src="images/abelmeltdown.jpg" loading="lazy" alt="" /></a>
-        <a class="card portrait" href="nordred.html" data-caption="NOR(E)D"><img src="images/nordred.jpg" loading="lazy" alt="" /></a>
-        <a class="card landscape" href="meltdown.html" data-caption="MELTDOWN x ZERO"><img src="images/meltdownvibe.jpg" loading="lazy" alt="" /></a>
-        <a class="card portrait" href="nord.html" data-caption="NORD x ZERO"><img src="images/nordspill.jpg" loading="lazy" alt="" /></a>
-        <a class="card landscape" href="meltdown.html" data-caption="MELTDOWN x ZERO"><img src="images/abelparty.jpg" loading="lazy" alt="" /></a>
-        <a class="card portrait" href="nord.html" data-caption="NORD x ZERO"><img src="images/nordhead.jpg" loading="lazy" alt="" /></a>
-        <a class="card landscape" href="meltdown.html" data-caption="MELTDOWN x ZERO"><img src="images/simonspegli.jpg" loading="lazy" alt="" /></a>
-        <a class="card portrait" href="nordred.html" data-caption="NOR(E)D"><img src="images/nordroka.jpg" loading="lazy" alt="" /></a>
+        <a class="card landscape" href="meltdown.html" data-caption="MELTDOWN x ZERO"><img src="images/abelmeltdown.jpeg" loading="lazy" alt="" /></a>
+        <a class="card portrait" href="nordred.html" data-caption="NOR(E)D"><img src="images/nordred.jpeg" loading="lazy" alt="" /></a>
+        <a class="card landscape" href="meltdown.html" data-caption="MELTDOWN x ZERO"><img src="images/meltdownvibe.jpeg" loading="lazy" alt="" /></a>
+        <a class="card portrait" href="nord.html" data-caption="NORD x ZERO"><img src="images/nordspill.jpeg" loading="lazy" alt="" /></a>
+        <a class="card landscape" href="meltdown.html" data-caption="MELTDOWN x ZERO"><img src="images/abelparty.jpeg" loading="lazy" alt="" /></a>
+        <a class="card portrait" href="nord.html" data-caption="NORD x ZERO"><img src="images/nordhead.jpeg" loading="lazy" alt="" /></a>
+        <a class="card landscape" href="meltdown.html" data-caption="MELTDOWN x ZERO"><img src="images/simonspegli.jpeg" loading="lazy" alt="" /></a>
+        <a class="card portrait" href="nordred.html" data-caption="NOR(E)D"><img src="images/nordroka.jpeg" loading="lazy" alt="" /></a>
       </div>
     </section>
 
     <section class="gallery-section container" aria-label="Concert">
-      <h2 class="section-title">Concert</h2>
+      <div class="section-head"><h2 class="section-title">Concert</h2><p class="section-subtitle">live music, movement, flash and atmosphere</p></div>
       <div class="gallery gallery--home">
-        <a class="card landscape" href="mrfy.html" data-caption="MRFY — live / Škisova"><img src="images/mrfyshit.jpg" loading="lazy" alt="" /></a>
-        <a class="card landscape" href="drill.html" data-caption="DRILL — Castle festival"><img src="images/drillroke.jpg" loading="lazy" alt="" /></a>
-        <a class="card landscape main" href="drill.html" data-caption="DRILL — Castle festival"><img src="images/drillpivo.jpg" loading="lazy" alt="" /></a>
+        <a class="card landscape" href="mrfy.html" data-caption="MRFY — live / Škisova"><img src="images/mrfyshit.jpeg" loading="lazy" alt="" /></a>
+        <a class="card landscape" href="drill.html" data-caption="DRILL — Castle festival"><img src="images/drillroke.jpeg" loading="lazy" alt="" /></a>
+        <a class="card landscape main" href="drill.html" data-caption="DRILL — Castle festival"><img src="images/drillpivo.jpeg" loading="lazy" alt="" /></a>
       </div>
     </section>
 
 <!-- FILM / VIDEOGRAPHY -->
 <section class="film-reel container" aria-label="Videography" id="filmReel">
+  <br><br>
   <h2 class="display2" data-reveal>Film</h2>
-  <p class="micro" style="margin-top: -6%; margin-bottom: 4%;">Drag to explore.</p>
+  <p class="micro film-kicker">moving image / drag to explore</p>
 
   <div class="reel">
     <div class="reel__track">
@@ -150,14 +200,16 @@
 
     <!-- CONTACT -->
     <section class="contact container" id="contact" aria-label="Contact">
-      <h2 class="display" data-reveal>Contact</h2>
-      <p class="description-contact" data-reveal>
+      <div class="contact__text" data-reveal>
+        <p class="micro accent-line">Contact</p>
+        <h2 class="display">Book the frame.</h2>
+        <p class="description-contact">For portraits, editorials, concerts, brand work or film stills — send the idea, location, date and desired mood.</p>
+      </div>
+      <div class="contact__links" data-reveal>
         <a href="mailto:shot.byyluka@gmail.com">Gmail</a>
-        
         <a href="https://instagram.com/shot.byluka" target="_blank" rel="noopener">Instagram</a>
-        
         <a href="tel:+38670463418">+386 70 463 418</a>
-      </p>
+      </div>
     </section>
 
 <!-- COPYRIGHT -->
