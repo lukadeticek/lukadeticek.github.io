@@ -36,6 +36,33 @@
   }
 })();
 
+/* 2a) Responsive motion outside the gallery */
+(function () {
+  const motionEls = Array.prototype.slice.call(document.querySelectorAll(
+    '.service-card, .client-intro__lead, .client-intro__meta span, .contact__links a'
+  ));
+  if (!motionEls.length) return;
+
+  motionEls.forEach((el, index) => {
+    el.classList.add('motion-reveal');
+    el.style.setProperty('--motion-delay', `${Math.min(index % 6, 5) * 55}ms`);
+  });
+
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-inview');
+        obs.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+
+    motionEls.forEach((el) => io.observe(el));
+  } else {
+    motionEls.forEach((el) => el.classList.add('is-inview'));
+  }
+})();
+
 /* 1b) Mobile nav toggle */
 document.addEventListener('DOMContentLoaded', () => {
   const siteNav = document.querySelector('.site-nav');
