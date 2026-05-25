@@ -157,6 +157,13 @@ main,
   filter: contrast(1.04);
   transform: scale(1.025);
 }
+body[data-page="overview"] .photo img {
+  transition: filter 220ms ease;
+}
+body[data-page="overview"] .photo:hover img {
+  filter: none;
+  transform: none;
+}
 
 body:not([data-page="overview"]) .photo::before {
   content: "";
