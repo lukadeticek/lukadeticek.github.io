@@ -165,3 +165,13 @@ html[lang="sl"] .about h1{font-size:clamp(40px,8.7vw,135px)}
 /* Slightly smaller hero portrait, retaining the left-hand placement. */
 .home-intro-portrait{width:82%;justify-self:start}
 @media(max-width:650px){.home-intro-portrait{width:65%;max-width:280px}}
+
+/* Smaller portrait tucked closer to the introduction. */
+@media(min-width:651px){
+ .home-intro{column-gap:3vw}
+ .home-intro-portrait{width:68%;justify-self:end}
+}
+@media(max-width:650px){
+ .home-intro{row-gap:18px}
+ .home-intro-portrait{width:55%;max-width:240px}
+}
