@@ -236,3 +236,8 @@ html{scroll-padding-top:125px}
 /* A cleaner near-white paper tone. */
 :root{--ink:#f8f7f3}
 dialog,dialog::backdrop{background:#f8f7f3}
+
+.collection-film{padding:0 3vw 70px}
+.collection-film video{display:block;width:min(100%,540px);max-height:75svh;margin:20px auto;object-fit:contain;background:#111110}
+.collection-film>.text-link{display:block;text-align:center}
+@media(max-width:650px){.collection-film{padding:0 5vw 45px}.client-line ul{gap:12px 20px}}
