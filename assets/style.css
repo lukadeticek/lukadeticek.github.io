@@ -175,3 +175,23 @@ html[lang="sl"] .about h1{font-size:clamp(40px,8.7vw,135px)}
  .home-intro{row-gap:18px}
  .home-intro-portrait{width:55%;max-width:240px}
 }
+
+/* Keep the compact portrait and copy left-aligned; work starts below the fold. */
+.home-intro{
+ min-height:calc(100svh - 100px);
+ padding-bottom:max(80px,10svh);
+ align-content:start;
+ grid-template-rows:min-content min-content;
+}
+@media(min-width:901px){
+ .home-intro{grid-template-columns:minmax(0,29fr) minmax(0,48fr) minmax(0,14fr);column-gap:3vw}
+ .home-intro-portrait{width:96%;justify-self:start}
+}
+@media(min-width:651px) and (max-width:900px){
+ .home-intro{grid-template-columns:minmax(0,29fr) minmax(0,58fr);column-gap:3vw;padding-right:10vw}
+ .home-intro-portrait{width:96%;justify-self:start}
+}
+@media(max-width:650px){
+ .home-intro{grid-template-rows:auto auto auto}
+ .home-intro-portrait{justify-self:start}
+}
