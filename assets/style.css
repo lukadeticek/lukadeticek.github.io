@@ -195,3 +195,23 @@ html[lang="sl"] .about h1{font-size:clamp(40px,8.7vw,135px)}
  .home-intro{grid-template-rows:auto auto auto}
  .home-intro-portrait{justify-self:start}
 }
+
+/* A quiet closing detail gives the hero's breathing room a purpose. */
+.home-intro{position:relative}
+.home-intro::before{
+ content:"PEOPLE / MUSIC / FASHION";
+ position:absolute;left:3vw;right:3vw;bottom:27px;
+ border-top:1px solid var(--line);padding-top:18px;
+ font-size:10px;letter-spacing:.08em;line-height:1.5;
+}
+.home-intro::after{
+ content:"SCROLL TO EXPLORE ↓";
+ position:absolute;right:3vw;bottom:27px;
+ font-size:10px;letter-spacing:.08em;line-height:1.5;
+}
+html[lang="sl"] .home-intro::before{content:"LJUDJE / GLASBA / MODA"}
+html[lang="sl"] .home-intro::after{content:"RAZIŠČI SPODAJ ↓"}
+@media(max-width:650px){
+ .home-intro::before{left:5vw;right:5vw;font-size:8px}
+ .home-intro::after{right:5vw;font-size:8px}
+}
