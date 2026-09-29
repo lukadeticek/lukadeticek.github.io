@@ -215,3 +215,20 @@ html[lang="sl"] .home-intro::after{content:"RAZIŠČI SPODAJ ↓"}
  .home-intro::before{left:5vw;right:5vw;font-size:8px}
  .home-intro::after{right:5vw;font-size:8px}
 }
+
+/* Center the hero composition and keep navigation available while scrolling. */
+header{
+ position:sticky;top:0;z-index:30;
+ background:var(--ink);color:var(--cream);
+ border-bottom:1px solid var(--line);
+}
+.light header{background:var(--cream);color:var(--ink)}
+html{scroll-padding-top:125px}
+.home-intro{align-content:center}
+@media(min-width:901px){
+ .home-intro{grid-template-columns:minmax(0,29fr) minmax(0,48fr);padding-left:10vw;padding-right:10vw;column-gap:3vw}
+}
+@media(min-width:651px) and (max-width:900px){
+ .home-intro{padding-left:7vw;padding-right:7vw}
+}
+@media(max-width:650px){html{scroll-padding-top:110px}}
